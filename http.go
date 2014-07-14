@@ -9,6 +9,7 @@ import (
 )
 
 
+
 // BatchGet gets data from urls in parallel.
 // Each request tried up to "retries" times.
 // Responses are returned on channel as []byte.
