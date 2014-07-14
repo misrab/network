@@ -2,6 +2,7 @@ package network
 
 import (
 	"log"
+	"time"
 
 	"io/ioutil"
 	"net/http"
@@ -21,7 +22,7 @@ func BatchGet(c chan []byte, urls []string, retries int) {
 			for try < retries + 1 {
 
 				resp, err := http.Get(url)
-				if err != nil { 
+				if err != nil {
 					// final try
 					if try == retries {
 						log.Printf("Error in get from url: %s\n", url)
@@ -30,6 +31,9 @@ func BatchGet(c chan []byte, urls []string, retries int) {
 					} else {
 						try++
 						log.Printf("Retry get #%d from url: %s\n", try, url)
+
+						// sleep for a bit before retrying
+						time.Sleep(500 * time.Millisecond)
 						continue
 					}
 				}
@@ -46,6 +50,9 @@ func BatchGet(c chan []byte, urls []string, retries int) {
 					} else {
 						try++
 						log.Printf("Retry reading response #%d from url: %s\n", try, url)
+						
+						// sleep for a bit before retrying
+						time.Sleep(500 * time.Millisecond)
 						continue
 					}
 				}
