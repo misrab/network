@@ -23,21 +23,21 @@ func ParseRss(body []byte) (Query, error) {
 }
 
 type Query interface {
-	Items() []Item
+	Items() []RssItem
 }
 
-func (r *Rss) Items() []Item {
+func (r *Rss) Items() []RssItem {
 	return r.Channel.Items
 }
 
 type Rss struct {
 	Rss xml.Name 			`xml:"rss"`
 	Channel struct {
-		Items []Item		`xml:"item"`
+		Items []RssItem		`xml:"item"`
 	} 						`xml:"channel"`
 }
 
-type Item struct {
+type RssItem struct {
 	Title string 			`xml:"title"`
 	Link string 			`xml:"link"`
 	Description string 		`xml:"description"`
