@@ -2,7 +2,9 @@ package network
 
 import (
 	"bytes"
+	"strings"
 
+	"html/template"
 	"encoding/xml"
 )
 
